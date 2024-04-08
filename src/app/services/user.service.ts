@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {map, Observable, of} from 'rxjs';
+import {delay, map, mergeMap, Observable, of} from 'rxjs';
 import {UserData} from '../../model/user-data';
 import {UserPersistenceService} from './user-persistence.service';
 import {NewUserData} from '../../model/new-user-data';
