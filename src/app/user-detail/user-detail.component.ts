@@ -3,7 +3,7 @@ import { UserService } from '../services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, throwError } from 'rxjs';
 import { UserData } from 'src/model/user-data';
-
+import {marked} from 'marked';
 @Component({
 	selector: 'app-user-detail',
 	templateUrl: './user-detail.component.html',
@@ -13,6 +13,8 @@ export class UserDetailComponent implements OnInit {
 	routeSubscription!: Subscription;
 
 	user!: UserData;
+
+	userBio: string = '';
 
 	constructor(
 	private readonly userService: UserService,
@@ -28,9 +30,10 @@ export class UserDetailComponent implements OnInit {
 				return throwError(new Error('ID not found in route parameters'));
 			}
 			return this.userService.findOneById(+id).subscribe(data => {
-				console.log('data ', data);
 
 				this.user = data;
+
+				this.userBio = marked(this.user.bio)
 			})
 		});
 	
